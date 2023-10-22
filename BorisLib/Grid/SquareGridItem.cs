@@ -2,8 +2,14 @@
 
 namespace BorisLib.Grid;
 
-public class BorisGridItem : ComponentBase, IDisposable
+public class SquareGridItem : ComponentBase, IDisposable
 {
+    /// <summary>
+    /// The grid that this item belongs to.
+    /// </summary>
+    [CascadingParameter]
+    public required SquareGrid Grid { get; set; }
+
     /// <summary>
     /// Width of the item, measured in grid columns.
     /// </summary>
@@ -35,21 +41,9 @@ public class BorisGridItem : ComponentBase, IDisposable
     public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
-    /// CSS style to apply to the grid item.
+    /// CSS string to set the grid related variables.
     /// </summary>
-    [Parameter]
-    public string? Style { get; set; }
-    
-    /// <summary>
-    /// The grid that this item belongs to.
-    /// </summary>
-    [CascadingParameter]
-    public BorisGrid? Grid { get; set; }
-
-    /// <summary>
-    /// CSS string to set GridItem variables.
-    /// </summary>
-    public string StyleString => $"--start-column: {StartColumn}; --end-column: {EndColumn}; --start-row: {StartRow}; --end-row: {EndRow}; --aspect-ratio: {AspectRatio}";
+    public string GridStyleString => $"--start-column: {StartColumn}; --end-column: {EndColumn}; --start-row: {StartRow}; --end-row: {EndRow}; --aspect-ratio: {AspectRatio}";
 
     private string StartColumn => X.HasValue ? X.Value.ToString() : $"span {Width}";
 
@@ -66,11 +60,11 @@ public class BorisGridItem : ComponentBase, IDisposable
     
     protected override void OnInitialized()
     {
-        Grid?.AddItem(this);
+        Grid.AddItem(this);
     }
 
     public void Dispose()
     {
-        Grid?.RemoveItem(this);
+        Grid.RemoveItem(this);
     }
 }

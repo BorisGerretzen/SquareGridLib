@@ -3,7 +3,7 @@
     @Items
 </CascadingValue>
 
-<div class="BorisGrid" style="--num-columns: @Columns; @Style">
+<div class="SquareGrid @Class" style="--num-columns: @Columns; @Style">
     @foreach (var gridItem in _items)
     {
         if (ItemTemplate != null)
@@ -12,7 +12,7 @@
         }
         else
         {
-            <div class="BorisGridItem" style="@gridItem.StyleString @gridItem.Style">
+            <div class="SquareGridItem" style="@gridItem.GridStyleString">
                 @gridItem.ChildContent
             </div>
         }

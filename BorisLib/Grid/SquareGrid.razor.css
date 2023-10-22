@@ -8,22 +8,25 @@
     --aspect-ratio: 1;
 }
 
-::deep.BorisGrid {
+.SquareGrid {
     display: grid;
-    grid-template-columns: repeat(var(--num-columns), 1fr);
+    grid-template-columns: repeat(var(--num-columns), minmax(0, 1fr));
     grid-auto-rows: minmax(0, 1fr);
 
     width: 100%;
     height: 100%;
 }
 
-::deep .BorisGridItem {
+::deep .SquareGridItem {
     grid-row: var(--start-row) / var(--end-row);
     grid-column: var(--start-column) / var(--end-column);
     aspect-ratio: var(--aspect-ratio);
+    align-self: stretch;
+    overflow-wrap: anywhere;
+    overflow: hidden;
 }
 
-::deep .BorisGridItem > * {
+::deep .SquareGridItem > * {
     height: 100%;
     width: 100%;
 }

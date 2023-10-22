@@ -1,20 +1,117 @@
-﻿@page "/Grid"
-<BorisGrid>
-    <BorisGridItem X="1" Y="1" Width="1" Height="2">
-        <div style="background-color: blue">
-            This should be square
+﻿@page "/grid"
+@using System.ComponentModel.DataAnnotations
+
+<div class="grid">
+    <SquareGrid Style="@_settings.Style" Columns="@_settings.Columns" @ref="MyGrid">
+        <Items>
+            @foreach (var item in _settings.HtmlSamples)
+            {
+                <SquareGridItem Height="item.Height" Width="item.Width" X="item.X" Y="item.Y">
+                    @((MarkupString)item.Html)
+                </SquareGridItem>
+            }
+        </Items>
+    </SquareGrid>
+</div>
+<div class="container">
+    <EditForm Model="_settings" OnSubmit="ValidSubmit">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
+        <div class="form-group">
+            <label for="columns">Columns</label>
+            <InputNumber id="columns" class="form-control" @bind-Value="_settings.Columns"/>
         </div>
-    </BorisGridItem>
-    <BorisGridItem X="5" Y="1" Height="5">
-        <div style="background-color: red;">
+        <div class="form-group">
+            <label for="style">Style</label>
+            <InputText id="style" class="form-control" @bind-Value="_settings.Style"/>
         </div>
-    </BorisGridItem>
-    <BorisGridItem X="7" Y="1" Height="5">
-        <div style="background-color: red;">
+
+
+        <div class="form-group">
+            <label>Grid entries</label>
+            <div class="container">
+                @foreach (var html in _settings.HtmlSamples)
+                {
+                    <div class="form-group">
+                        <label>HTML</label>
+                        <InputTextArea class="form-control" @bind-Value="html.Html" />
+
+                        <label>Dimensions</label>
+                        <div class="row">
+                            <div class="col">
+                                <InputNumber class="form-control" @bind-Value="html.Width" @oninput="RefreshInABit"/>
+                            </div>
+                            <div class="col">
+                                <InputNumber class="form-control" @bind-Value="html.Height" @oninput="RefreshInABit"/>
+                            </div>
+                        </div>
+
+                        <label>Position</label>
+                        <div class="row">
+                            <div class="col">
+                                <InputNumber class="form-control" @bind-Value="html.X" @oninput="RefreshInABit"/>
+                            </div>
+                            <div class="col">
+                                <InputNumber class="form-control" @bind-Value="html.Y" @oninput="RefreshInABit"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" @onclick="() => MyGrid?.Refresh()"><span class="oi oi-reload"></span></button>
+                        <hr/>
+                    </div>
+                }
+                <button type="button" class="btn btn-primary" @onclick="() => _settings.HtmlSamples.Add(new())" style="width: 100%">+</button>
+            </div>
         </div>
-    </BorisGridItem>
-    <BorisGridItem X="9" Y="1" Height="5">
-        <div style="background-color: red;">
-        </div>
-    </BorisGridItem>
-</BorisGrid>
+    </EditForm>
+</div>
+
+@code {
+    private readonly GridSettings _settings = new();
+    private SquareGrid? MyGrid { get; set; }
+    
+    private void ValidSubmit(EditContext editContext)
+    {
+        StateHasChanged();
+    }
+
+    private async Task RefreshInABit()
+    {
+        await Task.Delay(100);
+        MyGrid?.Refresh();
+    }
+    
+    public class GridSettings
+    {
+        [Range(1, 100)]
+        public int Columns { get; set; } = 12;
+
+        public string Style { get; set; } = "gap: 10px;";
+
+        public List<HtmlSample> HtmlSamples { get; set; } = new()
+        {
+            new HtmlSample
+            {
+                Html = string.Empty
+            }
+        };
+    }
+
+    public class HtmlSample
+    {
+        public string Html { get; set; } = string.Empty;
+
+        [Range(1, 100)]
+        public int Width { get; set; } = 1;
+        
+        [Range(1, 100)]
+        public int Height { get; set; } = 1;
+
+        [Range(1, 100)]
+        public int? X { get; set; }
+        
+        [Range(1, 100)]
+        public int? Y { get; set; }
+    }
+
+}
