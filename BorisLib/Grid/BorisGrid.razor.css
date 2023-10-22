@@ -1,0 +1,31 @@
+﻿:root {
+    --num-columns: 12;
+
+    --start-column: auto;
+    --end-column: auto;
+    --start-row: auto;
+    --end-row: auto;
+    --aspect-ratio: 1;
+}
+
+.BorisGrid {
+    display: grid;
+    grid-template-columns: repeat(var(--num-columns), 1fr);
+    grid-auto-rows: minmax(0, 1fr);
+
+    width: 100%;
+    height: 100%;
+}
+
+.BorisGridItem {
+    grid-column-start: var(--start-column);
+    grid-column-end: var(--end-column);
+    grid-row-start: var(--start-row);
+    grid-row-end: var(--end-row);
+    aspect-ratio: var(--aspect-ratio);
+}
+
+::deep .BorisGridItem > * {
+    height: 100%;
+    width: 100%;
+}

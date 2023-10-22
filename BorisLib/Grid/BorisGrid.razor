@@ -1,0 +1,43 @@
+﻿@using BorisLib.Grid
+<CascadingValue Value="@(this)">
+    @ChildContent
+</CascadingValue>
+
+<div class="BorisGrid" style="--num-columns: @Columns">
+    @foreach (var gridItem in _items)
+    {
+        <div class="BorisGridItem" style="--start-column: @gridItem.StartColumn; --end-column: @gridItem.EndColumn; --start-row: @gridItem.StartRow; --end-row: @gridItem.EndRow; --aspect-ratio: @gridItem.AspectRatio">
+            @gridItem.ChildContent
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Columns { get; set; } = 12;
+
+    [Parameter]
+    public int? Rows { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private List<BorisGridItem> _items = null!;
+    
+    protected override void OnInitialized()
+    {
+        _items = new List<BorisGridItem>();
+    }
+
+    public void AddItem(BorisGridItem item)
+    {
+        _items.Add(item);
+        StateHasChanged();
+    }
+
+    public void RemoveItem(BorisGridItem item)
+    {
+        _items.Remove(item);
+        StateHasChanged();
+    }
+}

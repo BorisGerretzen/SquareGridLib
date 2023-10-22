@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BorisLib", "BorisLib\BorisLib.csproj", "{888B8B5E-03BA-4233-B462-8F739F009C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BorisLibDemo", "BorisLibDemo\BorisLibDemo.csproj", "{D511DC79-39B1-4F72-B328-16AB37F5C60B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{888B8B5E-03BA-4233-B462-8F739F009C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{888B8B5E-03BA-4233-B462-8F739F009C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{888B8B5E-03BA-4233-B462-8F739F009C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{888B8B5E-03BA-4233-B462-8F739F009C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D511DC79-39B1-4F72-B328-16AB37F5C60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D511DC79-39B1-4F72-B328-16AB37F5C60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D511DC79-39B1-4F72-B328-16AB37F5C60B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D511DC79-39B1-4F72-B328-16AB37F5C60B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
