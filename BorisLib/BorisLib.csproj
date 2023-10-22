@@ -7,8 +7,7 @@
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
-
-
+    
     <ItemGroup>
         <SupportedPlatform Include="browser" />
     </ItemGroup>

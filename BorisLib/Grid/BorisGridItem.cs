@@ -4,42 +4,68 @@ namespace BorisLib.Grid;
 
 public class BorisGridItem : ComponentBase, IDisposable
 {
-    private const string Auto = "auto";
-    private const int DefaultWidth = 1;
-    private const int DefaultHeight = 1;
-
+    /// <summary>
+    /// Width of the item, measured in grid columns.
+    /// </summary>
     [Parameter]
-    public int Width { get; set; } = DefaultWidth;
-
+    public int Width { get; set; } = 1;
+    
+    /// <summary>
+    /// Height of the item, measured in grid rows.
+    /// </summary>
     [Parameter]
-    public int Height { get; set; } = DefaultHeight;
+    public int Height { get; set; } = 1;
 
+    /// <summary>
+    /// Column of the top-left corner of the item.
+    /// </summary>
     [Parameter]
     public int? X { get; set; }
 
+    /// <summary>
+    /// Row of the top-left corner of the item.
+    /// </summary>
     [Parameter]
     public int? Y { get; set; }
 
+    /// <summary>
+    /// What should be drawn in the grid area.
+    /// </summary>
     [Parameter]
-    public required RenderFragment ChildContent { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
+    /// <summary>
+    /// CSS style to apply to the grid item.
+    /// </summary>
+    [Parameter]
+    public string? Style { get; set; }
+    
+    /// <summary>
+    /// The grid that this item belongs to.
+    /// </summary>
     [CascadingParameter]
     public BorisGrid? Grid { get; set; }
 
-    public string StartColumn => X.HasValue ? X.Value.ToString() : Auto;
+    /// <summary>
+    /// CSS string to set GridItem variables.
+    /// </summary>
+    public string StyleString => $"--start-column: {StartColumn}; --end-column: {EndColumn}; --start-row: {StartRow}; --end-row: {EndRow}; --aspect-ratio: {AspectRatio}";
 
-    public string EndColumn => X.HasValue ? (X.Value + Width).ToString() : Auto;
+    private string StartColumn => X.HasValue ? X.Value.ToString() : $"span {Width}";
 
-    public string StartRow => Y.HasValue ? Y.Value.ToString() : Auto;
+    private string EndColumn => X.HasValue ? (X.Value + Width).ToString() : $"span {Width}";
 
-    public string EndRow => Y.HasValue ? (Y.Value + Height).ToString() : Auto;
+    private string StartRow => Y.HasValue ? Y.Value.ToString() : $"span {Height}";
 
-    public float AspectRatio => Width / (float)Height;
+    private string EndRow => Y.HasValue ? (Y.Value + Height).ToString() : $"span {Height}";
+
+    /// <summary>
+    /// The aspect ratio of the item.
+    /// </summary>
+    private float AspectRatio => Width / (float)Height;
     
     protected override void OnInitialized()
     {
-        if ((Width != DefaultWidth || Height != DefaultHeight) && (!X.HasValue || !Y.HasValue))
-            throw new ArgumentException("Can only specify width and height for fixed position items.");
         Grid?.AddItem(this);
     }
 
