@@ -1,0 +1,105 @@
+V |                      | ArgumentsFromParametersFile.OnBuildCreated (150)
+V |                      | Passing value for Build.Solution (SquareGridLib.sln)
+V |                      | HandleReSharperSurrogateArguments.OnBuildCreated (150)
+V |                      | InjectParameterValues.OnBuildCreated (100)
+V |                      | HandleShellCompletion.OnBuildCreated (75)
+V |                      | GenerateBuildServerConfigurations.OnBuildCreated (50)
+V |                      | InvokeBuildServerConfigurationGeneration.OnBuildCreated (45)
+V |                      | UpdateNotification.OnBuildCreated (10)
+V |                      | UnsetVisualStudioEnvironmentVariables.OnBuildCreated (0)
+V |                      | HandleVisualStudioDebugging.OnBuildCreated (0)
+V |                      | EventInvoker.OnBuildCreated (-3.4028235E+38)
+V |                      | HandlePlanRequests.OnBuildInitialized (10)
+V |                      | HandleHelpRequests.OnBuildInitialized (5)
+V |                      | Telemetry.OnBuildInitialized (0)
+V |                      | Sending BuildStarted telemetry event ...
+V |                      |   build_components         = 
+V |                      |   build_type               = Project
+V |                      |   compile_time             = 3
+V |                      |   config_generators        = 
+V |                      |   host                     = Rider
+V |                      |   num_custom_components    = 0
+V |                      |   num_custom_extensions    = 0
+V |                      |   num_partitioned_targets  = 0
+V |                      |   num_secrets              = 0
+V |                      |   num_targets              = 4
+V |                      |   os_architecture          = X64
+V |                      |   os_platform              = Windows
+V |                      |   repo_branch              = main
+V |                      |   repo_commit              = cab326
+V |                      |   repo_provider            = GitHub
+V |                      |   repo_url                 = a7c984
+V |                      |   target_framework         = .NETCoreApp,Version=v6.0
+V |                      |   version_dotnet_sdk       = 7.0.402
+V |                      |   version_nuke_common      = 7.0.6
+V |                      |   version_nuke_global_tool = 7.0.6
+V |                      | InjectNonParameterValues.OnBuildInitialized (-100)
+I |                      | > "C:\Program Files\dotnet\dotnet.exe" C:\Users\Boris\.nuget\packages\gitversion.tool\5.12.0\tools\net6.0\any\gitversion.dll /nocache
+V |                      | @ S:\Hobby\Programming\BorisLib
+W |                      | Solution S:\Hobby\Programming\BorisLib\SquareGridLib.sln has active build configurations for the build project.
+Either enable SuppressBuildProjectCheck on Build.Solution or remove the following entries from the solution file:
+  - {599BEDF1-4AF7-4142-AA91-FCD63D8F6927}.Debug|Any CPU.Build.0 = Debug|Any CPU
+  - {599BEDF1-4AF7-4142-AA91-FCD63D8F6927}.Release|Any CPU.Build.0 = Release|Any CPU
+V |                      | EventInvoker.OnBuildInitialized (-3.4028235E+38)
+V | Restore              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+V | Restore              | Telemetry.OnTargetSucceeded (0)
+V | Restore              | Sending TargetSucceeded telemetry event ...
+V | Restore              |   build_components         = 
+V | Restore              |   build_type               = Project
+V | Restore              |   compile_time             = 3
+V | Restore              |   config_generators        = 
+V | Restore              |   host                     = Rider
+V | Restore              |   num_custom_components    = 0
+V | Restore              |   num_custom_extensions    = 0
+V | Restore              |   num_partitioned_targets  = 0
+V | Restore              |   num_secrets              = 0
+V | Restore              |   num_targets              = 4
+V | Restore              |   os_architecture          = X64
+V | Restore              |   os_platform              = Windows
+V | Restore              |   repo_branch              = main
+V | Restore              |   repo_commit              = cab326
+V | Restore              |   repo_provider            = GitHub
+V | Restore              |   repo_url                 = a7c984
+V | Restore              |   target_current_partition = 1
+V | Restore              |   target_duration          = 0
+V | Restore              |   target_framework         = .NETCoreApp,Version=v6.0
+V | Restore              |   target_name              = Restore
+V | Restore              |   target_total_partitions  = 1
+V | Restore              |   version_dotnet_sdk       = 7.0.402
+V | Restore              |   version_nuke_common      = 7.0.6
+V | Restore              |   version_nuke_global_tool = 7.0.6
+V | Restore              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V | Compile              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+V | Compile              | Telemetry.OnTargetSucceeded (0)
+V | Compile              | Sending TargetSucceeded telemetry event ...
+V | Compile              |   build_components         = 
+V | Compile              |   build_type               = Project
+V | Compile              |   compile_time             = 4
+V | Compile              |   config_generators        = 
+V | Compile              |   host                     = Rider
+V | Compile              |   num_custom_components    = 0
+V | Compile              |   num_custom_extensions    = 0
+V | Compile              |   num_partitioned_targets  = 0
+V | Compile              |   num_secrets              = 0
+V | Compile              |   num_targets              = 4
+V | Compile              |   os_architecture          = X64
+V | Compile              |   os_platform              = Windows
+V | Compile              |   repo_branch              = main
+V | Compile              |   repo_commit              = cab326
+V | Compile              |   repo_provider            = GitHub
+V | Compile              |   repo_url                 = a7c984
+V | Compile              |   target_current_partition = 1
+V | Compile              |   target_duration          = 0
+V | Compile              |   target_framework         = .NETCoreApp,Version=v6.0
+V | Compile              |   target_name              = Compile
+V | Compile              |   target_total_partitions  = 1
+V | Compile              |   version_dotnet_sdk       = 7.0.402
+V | Compile              |   version_nuke_common      = 7.0.6
+V | Compile              |   version_nuke_global_tool = 7.0.6
+V | Compile              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V | Pack                 | EventInvoker.OnTargetRunning (-3.4028235E+38)
+I | Pack                 | > "C:\Program Files\dotnet\dotnet.exe" pack S:\Hobby\Programming\BorisLib\SquareGridLib\SquareGridLib.csproj --configuration Debug --no-build --no-restore --output S:\Hobby\Programming\BorisLib\output\nuget --no-dependencies /property:Description="Blazor dashboard layout component that allows for placing panels on a 2d grid." /property:PackageTags="blazor dashboard dashboard-layout" /property:Authors="Boris Gerretzen" /property:PackageProjectUrl=https://github.com/BorisGerretzen/SquareGridLib /property:RepositoryUrl=https://github.com/BorisGerretzen/SquareGridLib /property:Version=0.1.0
+V | Pack                 | @ S:\Hobby\Programming\BorisLib
+D | Pack                 | MSBuild version 17.7.3+8ec440e68 for .NET
+V | Pack                 | Telemetry.OnTargetSucceeded (0)
+V | Pack                 | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
