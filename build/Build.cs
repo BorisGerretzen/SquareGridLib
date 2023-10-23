@@ -29,7 +29,7 @@ class Build : NukeBuild
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
     [Parameter] string NugetApiUrl = "https://api.nuget.org/v3/index.json"; //default
-    [Parameter] string NugetApiKey;
+    [Parameter] [Secret] string NugetApiKey;
 
     [Solution]
     readonly Solution Solution;
@@ -45,6 +45,7 @@ class Build : NukeBuild
         {
             DotNetTasks.DotNetClean(s => s
                 .SetProject(Solution.GetProject(Globals.ProjectName))
+                .SetConfiguration(Configuration)
             );
         });
 
@@ -62,6 +63,7 @@ class Build : NukeBuild
         {
             DotNetTasks.DotNetBuild(s => s
                 .SetProjectFile(Solution.GetProject(Globals.ProjectName)!.Path)
+                .SetConfiguration(Configuration)
             );
         });
 
