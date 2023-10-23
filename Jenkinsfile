@@ -13,6 +13,7 @@ pipeline {
         stage('Pack') {
             steps {
                 withDotNet(sdk: '7.0') {
+                                        sh 'ls /var/jenkins_home/.dotnet/tools'
                     sh 'nuke pack'
                 }
             }
