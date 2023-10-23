@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Set path') {
+            steps {
+                sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
+            }
+        }
         stage('Install nuke') {
             steps {
                 withDotNet(sdk: '7.0') {
