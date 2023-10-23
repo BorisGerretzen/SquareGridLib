@@ -6,6 +6,7 @@ using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Utilities.Collections;
+using Serilog;
 
 class Build : NukeBuild
 {
@@ -29,6 +30,15 @@ class Build : NukeBuild
                 .SetProject(Solution.GetProject(Globals.ProjectName))
                 .SetConfiguration(Configuration)
             );
+
+            // remove old builds
+            var oldBuilds = PackageDirectory.GetFiles("*.nupkg").ToList();
+            Log.Information("Deleting {NumOldBuilds} old builds from \"{PackageDirectory}\"", oldBuilds.Count, PackageDirectory);
+            foreach (var file in oldBuilds)
+            {
+                Log.Debug("Deleting file \"{File}\"", file);
+                file.DeleteFile();
+            }
         });
 
     Target Restore => _ => _
@@ -57,8 +67,8 @@ class Build : NukeBuild
                 .SetProject(Solution.GetProject(Globals.ProjectName))
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
-                .SetDescription("Blazor dashboard layout component that allows for placing panels on a 2d grid.")
-                .SetPackageTags("blazor dashboard dashboard-layout")
+                .SetDescription("Blazor dashboard layout component that allows for placing panels of any size on a 2d grid.")
+                .SetPackageTags("blazor dashboard dashboard-layout grid grid-layout")
                 .SetNoDependencies(true)
                 .SetOutputDirectory(PackageDirectory)
                 .SetAuthors("Boris Gerretzen")
@@ -87,10 +97,5 @@ class Build : NukeBuild
                 });
         });
 
-    /// Support plugins are available for:
-    /// - JetBrains ReSharper        https://nuke.build/resharper
-    /// - JetBrains Rider            https://nuke.build/rider
-    /// - Microsoft VisualStudio     https://nuke.build/visualstudio
-    /// - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(x => x.Compile);
 }

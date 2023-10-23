@@ -12,6 +12,13 @@ pipeline {
                 }
             }
         }
+        stage('Clean') {
+            steps {
+                withDotNet(sdk: '7.0') {
+                    sh '/var/jenkins_home/.dotnet/tools/nuke clean'
+                }
+            }
+        }
         stage('Nuke') {
             steps {
                 withDotNet(sdk: '7.0') {
