@@ -33,7 +33,7 @@ class Build : NukeBuild
 
     [Solution]
     readonly Solution Solution;
-// 
+
     [GitVersion] GitVersion GitVersion;
 
     AbsolutePath OutputDirectory => RootDirectory / "output";
