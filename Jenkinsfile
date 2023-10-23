@@ -1,14 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('Set path') {
-            steps {
-                sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
-            }
-        }
         stage('Install nuke') {
             steps {
                 withDotNet(sdk: '7.0') {
+                    sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
                     sh 'dotnet tool install --global Nuke.GlobalTool | echo "already installed"'
                 }
             }
