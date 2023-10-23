@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    withDotNet(sdk: '7.0')
     stages {
         stage('Checkout') {
             steps {
@@ -14,8 +13,10 @@ pipeline {
             }
         }
         stage('Install nuke') {
-            steps {
-                sh 'dotnet tool install --global Nuke.GlobalTool'
+            withDotNet(sdk: '7.0') { 
+                steps {
+                    sh 'dotnet tool install --global Nuke.GlobalTool'
+                }
             }
         }
         stage('Pack') {
