@@ -1,6 +1,8 @@
 ﻿using Nuke.Common;
+using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Tools.DotNet;
 
+[GitHubActions("test", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.PullRequest }, InvokedTargets = new[] { nameof(Test) })]
 partial class Build
 {
     Target CleanTest => _ => _
@@ -23,8 +25,10 @@ partial class Build
         });
 
     Target Test => _ => _
+        .DependsOn(Clean)
         .DependsOn(CleanTest)
         .DependsOn(CompileTest)
+        .DependsOn(Compile)
         .Executes(() =>
         {
             DotNetTasks.DotNetTest(s => s
