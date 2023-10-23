@@ -13,8 +13,8 @@ pipeline {
             }
         }
         stage('Install nuke') {
-            withDotNet(sdk: '7.0') { 
-                steps {
+            steps {
+                withDotNet(sdk: '7.0') {
                     sh 'dotnet tool install --global Nuke.GlobalTool'
                 }
             }
