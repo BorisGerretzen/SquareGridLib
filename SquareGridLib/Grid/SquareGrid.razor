@@ -2,7 +2,7 @@
     @Items
 </CascadingValue>
 
-<div @attributes="@UnmatchedAttributes" class="SquareGrid @Class" style="--num-columns: @Columns; @Style" >
+<div @attributes="@UnmatchedAttributes" class="SquareGrid @Class" style="--num-columns: @Columns; @Style">
     @foreach (var gridItem in _items)
     {
         if (ItemTemplate != null)

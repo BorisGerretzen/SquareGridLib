@@ -35,11 +35,11 @@
                 {
                     <div class="form-group">
                         <label>HTML</label>
-                        <InputTextArea class="form-control" @bind-Value="html.Html" />
-                        
+                        <InputTextArea class="form-control" @bind-Value="html.Html"/>
+
                         <label>Item style</label>
-                        <InputText class="form-control" @bind-Value="html.Style" />
-                        
+                        <InputText class="form-control" @bind-Value="html.Style"/>
+
                         <label>Dimensions</label>
                         <div class="row">
                             <div class="col">
@@ -59,11 +59,13 @@
                                 <InputNumber class="form-control" @bind-Value="html.Y" @oninput="RefreshInABit"/>
                             </div>
                         </div>
-                        <button class="btn btn-primary" @onclick="() => MyGrid?.Refresh()"><span class="oi oi-reload"></span></button>
+                        <button class="btn btn-primary" @onclick="() => MyGrid?.Refresh()">
+                            <span class="oi oi-reload"></span>
+                        </button>
                         <hr/>
                     </div>
                 }
-                <button type="button" class="btn btn-primary" @onclick="() => _settings.HtmlSamples.Add(new())" style="width: 100%">+</button>
+                <button type="button" class="btn btn-primary" @onclick="() => _settings.HtmlSamples.Add(new HtmlSample())" style="width: 100%">+</button>
             </div>
         </div>
     </EditForm>
@@ -72,7 +74,7 @@
 @code {
     private readonly GridSettings _settings = new();
     private SquareGrid? MyGrid { get; set; }
-    
+
     private void ValidSubmit(EditContext editContext)
     {
         StateHasChanged();
@@ -83,7 +85,7 @@
         await Task.Delay(100);
         MyGrid?.Refresh();
     }
-    
+
     public class GridSettings
     {
         [Range(1, 100)]
@@ -106,16 +108,16 @@
 
         [Range(1, 100)]
         public int Width { get; set; } = 1;
-        
+
         [Range(1, 100)]
         public int Height { get; set; } = 1;
 
         [Range(1, 100)]
         public int? X { get; set; }
-        
+
         [Range(1, 100)]
         public int? Y { get; set; }
-        
+
         public string? Style { get; set; }
     }
 

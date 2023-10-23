@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SquareGridLib\SquareGridLib.csproj" />
+        <ProjectReference Include="..\SquareGridLib\SquareGridLib.csproj"/>
     </ItemGroup>
 
 </Project>

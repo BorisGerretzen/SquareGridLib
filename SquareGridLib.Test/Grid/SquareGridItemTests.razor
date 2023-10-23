@@ -1,0 +1,19 @@
+﻿@inherits TestContext
+
+@code {
+
+    [Fact]
+    public void RendersNothingWithoutBody()
+    {
+        var cut = Render(@<SquareGridItem/>);
+        cut.MarkupMatches("");
+    }
+
+    [Fact]
+    public void RendersNothingWithBody()
+    {
+        var cut = Render(@<SquareGridItem>Test</SquareGridItem>);
+        cut.MarkupMatches("");
+    }
+
+}
