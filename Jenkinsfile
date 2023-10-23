@@ -16,14 +16,14 @@ pipeline {
         stage('Pack') {
             steps {
                 withDotNet(sdk: '7.0') {
-                    sh 'dotnet nuke pack'
+                    sh 'nuke pack'
                 }
             }
         }
         stage('Push') {
             steps {
                 withDotNet(sdk: '7.0') {
-                    sh 'dotnet nuke push'
+                    sh 'nuke push'
                 }
             }
         }
