@@ -21,12 +21,16 @@ pipeline {
         }
         stage('Pack') {
             steps {
-                sh 'nuke pack'
+                withDotNet(sdk: '7.0') {
+                    sh 'nuke pack'
+                }
             }
         }
         stage('Push') {
             steps {
-                sh 'nuke push'
+                withDotNet(sdk: '7.0') {
+                    sh 'nuke push'
+                }
             }
         }
     }
