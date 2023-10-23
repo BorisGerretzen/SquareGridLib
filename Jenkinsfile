@@ -12,15 +12,7 @@ pipeline {
                 }
             }
         }
-        stage('Pack') {
-            steps {
-                withDotNet(sdk: '7.0') {
-                    sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
-                    sh '/var/jenkins_home/.dotnet/tools/nuke pack'
-                }
-            }
-        }
-        stage('Push') {
+        stage('Nuke') {
             steps {
                 withDotNet(sdk: '7.0') {
                     sh '/var/jenkins_home/.dotnet/tools/nuke push --NugetApiKey "$NUGET_KEY"'
