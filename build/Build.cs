@@ -30,12 +30,15 @@ partial class Build : NukeBuild
             );
 
             // remove old builds
-            var oldBuilds = PackageDirectory.GetFiles("*.nupkg").ToList();
-            Log.Information("Deleting {NumOldBuilds} old builds from \"{PackageDirectory}\"", oldBuilds.Count, PackageDirectory);
-            foreach (var file in oldBuilds)
+            if (PackageDirectory.Exists())
             {
-                Log.Debug("Deleting file \"{File}\"", file);
-                file.DeleteFile();
+                var oldBuilds = PackageDirectory.GetFiles("*.nupkg").ToList();
+                Log.Information("Deleting {NumOldBuilds} old builds from \"{PackageDirectory}\"", oldBuilds.Count, PackageDirectory);
+                foreach (var file in oldBuilds)
+                {
+                    Log.Debug("Deleting file \"{File}\"", file);
+                    file.DeleteFile();
+                }
             }
         });
 
