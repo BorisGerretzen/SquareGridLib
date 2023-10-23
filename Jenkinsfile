@@ -23,7 +23,7 @@ pipeline {
         stage('Push') {
             steps {
                 withDotNet(sdk: '7.0') {
-                    sh 'nuke push --NugetApiKey "$NUGET_KEY"'
+                    sh '/var/jenkins_home/.dotnet/tools/nuke push --NugetApiKey "$NUGET_KEY"'
                 }
             }
         }
