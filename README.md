@@ -2,6 +2,7 @@
 
 [![NuGet](https://img.shields.io/nuget/v/SquareGridLib.svg)](https://www.nuget.org/packages/SquareGridLib/)\
 Provides a 2D grid component on which you can place panels of customizable size.
+Similar to the syncfusion blazor dashboard but simpler.
 
 ## How to use
 
