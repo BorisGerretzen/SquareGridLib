@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    withDotNet(sdk: '7.0')
     stages {
         stage('Checkout') {
             steps {
