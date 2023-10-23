@@ -21,21 +21,21 @@ class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Solution] 
+    [Solution]
     readonly Solution Solution;
 
     [GitVersion] GitVersion GitVersion;
-    
+
     AbsolutePath OutputDirectory => RootDirectory / "output";
 
     const string RepositoryUrl = "https://github.com/BorisGerretzen/SquareGridLib";
-    
-    
+
+
     Target Clean => _ => _
         .Before(Restore)
         .Executes(() =>
