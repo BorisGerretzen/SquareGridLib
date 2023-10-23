@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace BorisLib.Grid;
+namespace SquareGridLib.Grid;
 
 public class SquareGridItem : ComponentBase, IDisposable
 {
@@ -39,11 +39,26 @@ public class SquareGridItem : ComponentBase, IDisposable
     /// </summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
-
+    
+    /// <summary>
+    /// CSS class string to apply to the item.
+    /// </summary>
+    [Parameter]
+    public string? Class { get; set; }
+    
+    /// <summary>
+    /// CSS style string to apply to the item.
+    /// </summary>
+    [Parameter]
+    public string? Style { get; set; }
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? UnmatchedAttributes { get; set; }
+    
     /// <summary>
     /// CSS string to set the grid related variables.
     /// </summary>
-    public string GridStyleString => $"--start-column: {StartColumn}; --end-column: {EndColumn}; --start-row: {StartRow}; --end-row: {EndRow}; --aspect-ratio: {AspectRatio}";
+    public string GridStyleString => $"--start-column: {StartColumn}; --end-column: {EndColumn}; --start-row: {StartRow}; --end-row: {EndRow}; --aspect-ratio: {AspectRatio}; ";
 
     private string StartColumn => X.HasValue ? X.Value.ToString() : $"span {Width}";
 

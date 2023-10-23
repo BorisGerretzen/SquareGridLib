@@ -12,7 +12,8 @@
     display: grid;
     grid-template-columns: repeat(var(--num-columns), minmax(0, 1fr));
     grid-auto-rows: minmax(0, 1fr);
-
+    grid-auto-flow: dense;
+    justify-items: stretch;
     width: 100%;
     height: 100%;
 }

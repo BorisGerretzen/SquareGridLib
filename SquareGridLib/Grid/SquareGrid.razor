@@ -1,0 +1,19 @@
+﻿<CascadingValue Value="@(this)">
+    @Items
+</CascadingValue>
+
+<div @attributes="@UnmatchedAttributes" class="SquareGrid @Class" style="--num-columns: @Columns; @Style" >
+    @foreach (var gridItem in _items)
+    {
+        if (ItemTemplate != null)
+        {
+            @ItemTemplate(gridItem)
+        }
+        else
+        {
+            <div @attributes="@gridItem.UnmatchedAttributes" class="SquareGridItem @gridItem.Class" style="@gridItem.GridStyleString @gridItem.Style">
+                @gridItem.ChildContent
+            </div>
+        }
+    }
+</div>

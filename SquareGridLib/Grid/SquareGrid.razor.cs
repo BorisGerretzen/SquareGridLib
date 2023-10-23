@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace BorisLib.Grid;
+namespace SquareGridLib.Grid;
 
 public partial class SquareGrid : ComponentBase
 {
@@ -11,7 +11,7 @@ public partial class SquareGrid : ComponentBase
     public int Columns { get; set; } = 12;
 
     /// <summary>
-    /// List of BorisGridItem that will be added to the grid.
+    /// List of SquareGridItems that will be added to the grid.
     /// </summary>
     [Parameter]
     public RenderFragment? Items { get; set; }
@@ -34,6 +34,9 @@ public partial class SquareGrid : ComponentBase
     [Parameter]
     public string? Class { get; set; }
     
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? UnmatchedAttributes { get; set; }
+
     private List<SquareGridItem> _items = null!;
     
     protected override void OnInitialized()

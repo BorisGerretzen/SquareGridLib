@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BorisLib", "BorisLib\BorisLib.csproj", "{888B8B5E-03BA-4233-B462-8F739F009C1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquareGridLib", "SquareGridLib\SquareGridLib.csproj", "{888B8B5E-03BA-4233-B462-8F739F009C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BorisLibDemo", "BorisLibDemo\BorisLibDemo.csproj", "{D511DC79-39B1-4F72-B328-16AB37F5C60B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquareGridLibDemo", "SquareGridLibDemo\SquareGridLibDemo.csproj", "{D511DC79-39B1-4F72-B328-16AB37F5C60B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

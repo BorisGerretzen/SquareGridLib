@@ -1,12 +1,13 @@
 ﻿@page "/grid"
 @using System.ComponentModel.DataAnnotations
+@using SquareGridLib.Grid
 
 <div class="grid">
     <SquareGrid Style="@_settings.Style" Columns="@_settings.Columns" @ref="MyGrid">
         <Items>
             @foreach (var item in _settings.HtmlSamples)
             {
-                <SquareGridItem Height="item.Height" Width="item.Width" X="item.X" Y="item.Y">
+                <SquareGridItem Height="item.Height" Width="item.Width" X="item.X" Y="item.Y" Style="@item.Style">
                     @((MarkupString)item.Html)
                 </SquareGridItem>
             }
@@ -36,7 +37,10 @@
                     <div class="form-group">
                         <label>HTML</label>
                         <InputTextArea class="form-control" @bind-Value="html.Html" />
-
+                        
+                        <label>Item style</label>
+                        <InputText class="form-control" @bind-Value="html.Style" />
+                        
                         <label>Dimensions</label>
                         <div class="row">
                             <div class="col">
@@ -112,6 +116,8 @@
         
         [Range(1, 100)]
         public int? Y { get; set; }
+        
+        public string? Style { get; set; }
     }
 
 }
