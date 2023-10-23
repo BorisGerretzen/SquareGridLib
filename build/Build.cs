@@ -100,6 +100,7 @@ class Build : NukeBuild
                         .SetTargetPath(x)
                         .SetSource(NugetApiUrl)
                         .SetApiKey(NugetApiKey)
+                        .EnableSkipDuplicate()
                     );
                 });
         });
