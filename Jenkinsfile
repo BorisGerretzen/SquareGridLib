@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        NUGET_KEY = credentials('jenkins-nuget-key')
+    }
     stages {
         stage('Install nuke') {
             steps {
@@ -20,7 +23,7 @@ pipeline {
         stage('Push') {
             steps {
                 withDotNet(sdk: '7.0') {
-                    sh 'nuke push'
+                    sh 'nuke push --NugetApiKey "$NUGET_KEY"'
                 }
             }
         }
