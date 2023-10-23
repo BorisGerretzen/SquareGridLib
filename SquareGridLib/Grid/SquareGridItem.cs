@@ -8,7 +8,7 @@ public class SquareGridItem : ComponentBase, IDisposable
     ///     The grid that this item belongs to.
     /// </summary>
     [CascadingParameter]
-    public required SquareGrid Grid { get; set; }
+    public SquareGrid? Grid { get; set; }
 
     /// <summary>
     ///     Width of the item, measured in grid columns.
@@ -75,11 +75,12 @@ public class SquareGridItem : ComponentBase, IDisposable
 
     public void Dispose()
     {
-        Grid.RemoveItem(this);
+        GC.SuppressFinalize(this);
+        Grid?.RemoveItem(this);
     }
 
     protected override void OnInitialized()
     {
-        Grid.AddItem(this);
+        Grid?.AddItem(this);
     }
 }

@@ -1,0 +1,89 @@
+﻿@using AngleSharp.Css.Dom
+@inherits TestContext
+
+@code {
+
+    [Fact]
+    public void StyleShouldApply()
+    {
+        var cut = Render(@<SquareGrid Style="background-color: red"/>);
+        var cssProperty = cut.Find(Globals.SquareGridClass).GetStyle().GetProperty("background-color");
+        Assert.Equal("rgba(255, 0, 0, 1)", cssProperty.Value);
+    }
+
+    [Fact]
+    public void ClassShouldApply()
+    {
+        var cut = Render(@<SquareGrid Class="test"/>);
+        var classes = cut.Find(Globals.SquareGridClass).GetAttribute("class");
+        Assert.Contains("test", classes);
+    }
+
+    [Fact]
+    public void ContainedItemShouldBeAdded()
+    {
+        var cut = Render(
+            @<SquareGrid>
+                <Items>
+                    <SquareGridItem/>
+                </Items>
+            </SquareGrid>
+            );
+
+        var grid = cut.FindComponent<SquareGrid>();
+        Assert.Single(grid.Instance.RegisteredItems);
+    }
+
+    [Fact]
+    public async Task AddingItemShouldAdd()
+    {
+        var cut = Render(@<SquareGrid/>);
+        var grid = cut.FindComponent<SquareGrid>();
+        await grid.InvokeAsync(() => grid.Instance.AddItem(new SquareGridItem { Grid = grid.Instance }));
+        Assert.Single(grid.Instance.RegisteredItems);
+    }
+
+    [Fact]
+    public async Task RemovingItemShouldRemoveRender()
+    {
+        var cut = Render(@<SquareGrid/>);
+        var grid = cut.FindComponent<SquareGrid>();
+        var item = new SquareGridItem { Grid = grid.Instance };
+        await grid.InvokeAsync(() => grid.Instance.AddItem(item));
+
+        var gridItems = grid.FindAll(Globals.SquareGridItemClass);
+        Assert.Single(gridItems);
+
+        await grid.InvokeAsync(() => grid.Instance.RemoveItem(item));
+        gridItems = grid.FindAll(Globals.SquareGridItemClass);
+        Assert.Empty(gridItems);
+    }
+
+    [Fact]
+    public async Task UpdatingItemShouldUpdateRender()
+    {
+        var cut = Render(@<SquareGrid/>);
+        var grid = cut.FindComponent<SquareGrid>();
+
+#pragma warning disable BL0005
+        var item = new SquareGridItem { Grid = grid.Instance, X = 3 };
+#pragma warning restore BL0005
+
+        await grid.InvokeAsync(() => grid.Instance.AddItem(item));
+
+        Assert.Equal(3, grid.Instance.RegisteredItems.First().X);
+
+        var startColumn = grid.Find(Globals.SquareGridItemClass).GetStyle().GetProperty("--start-column");
+        Assert.Equal("3", startColumn.Value);
+
+#pragma warning disable BL0005
+        item.X = 5;
+#pragma warning restore BL0005
+
+        await grid.InvokeAsync(() => grid.Instance.Refresh());
+
+        startColumn = grid.Find(Globals.SquareGridItemClass).GetStyle().GetProperty("--start-column");
+        grid.WaitForAssertion(() => Assert.Equal("5", startColumn.Value));
+    }
+
+}

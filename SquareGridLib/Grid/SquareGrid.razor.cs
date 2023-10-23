@@ -7,6 +7,11 @@ public partial class SquareGrid : ComponentBase
     private List<SquareGridItem> _items = null!;
 
     /// <summary>
+    ///     Items that have been registered, i.e. added through <see cref="AddItem" /> or through <see cref="Items" />.
+    /// </summary>
+    public IReadOnlyCollection<SquareGridItem> RegisteredItems => _items;
+
+    /// <summary>
     ///     The number of columns in the grid.
     /// </summary>
     [Parameter]
