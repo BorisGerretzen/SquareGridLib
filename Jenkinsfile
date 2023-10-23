@@ -5,6 +5,7 @@ pipeline {
             steps {
                 withDotNet(sdk: '7.0') {
                     sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
+                    sh 'where nuke'
                     sh 'dotnet tool install --global Nuke.GlobalTool | echo "already installed"'
                 }
             }
