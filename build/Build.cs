@@ -67,7 +67,6 @@ class Build : NukeBuild
             DotNetTasks.DotNetPack(s => s
                 .SetProject(Solution.GetProject(Globals.ProjectName))
                 .SetConfiguration(Configuration)
-                .EnableNoBuild()
                 .EnableNoRestore()
                 .SetDescription("Blazor dashboard layout component that allows for placing panels on a 2d grid.")
                 .SetPackageTags("blazor dashboard dashboard-layout")
