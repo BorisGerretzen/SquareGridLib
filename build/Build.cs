@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DefaultNamespace;
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.Execution;
@@ -32,25 +33,31 @@ class Build : NukeBuild
     [GitVersion] GitVersion GitVersion;
 
     AbsolutePath OutputDirectory => RootDirectory / "output";
-
-    const string RepositoryUrl = "https://github.com/BorisGerretzen/SquareGridLib";
-
-
+    
     Target Clean => _ => _
         .Before(Restore)
         .Executes(() =>
         {
+            DotNetTasks.DotNetClean(s => s
+                .SetProject(Solution.GetProject(Globals.ProjectName))
+            );
         });
 
     Target Restore => _ => _
         .Executes(() =>
         {
+            DotNetTasks.DotNetRestore(s => s
+                .SetProjectFile(Solution.GetProject(Globals.ProjectName)!.Path)
+            );
         });
 
     Target Compile => _ => _
         .DependsOn(Restore)
         .Executes(() =>
         {
+            DotNetTasks.DotNetBuild(s => s
+                .SetProjectFile(Solution.GetProject(Globals.ProjectName)!.Path)
+            );
         });
 
     Target Pack => _ => _
@@ -58,7 +65,7 @@ class Build : NukeBuild
         .Executes(() =>
         {
             DotNetTasks.DotNetPack(s => s
-                .SetProject(Solution.GetProject("SquareGridLib"))
+                .SetProject(Solution.GetProject(Globals.ProjectName))
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
                 .EnableNoRestore()
@@ -67,8 +74,8 @@ class Build : NukeBuild
                 .SetNoDependencies(true)
                 .SetOutputDirectory(OutputDirectory / "nuget")
                 .SetAuthors("Boris Gerretzen")
-                .SetPackageProjectUrl(RepositoryUrl)
-                .SetRepositoryUrl(RepositoryUrl)
+                .SetPackageProjectUrl(Globals.RepositoryUrl)
+                .SetRepositoryUrl(Globals.RepositoryUrl)
                 .SetVersion(GitVersion.NuGetVersionV2)
             );
         });
