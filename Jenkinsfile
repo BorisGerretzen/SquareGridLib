@@ -3,21 +3,21 @@ pipeline {
     stages {
         stage('Install nuke') {
             steps {
-                withDotNet() {
+                withDotNet {
                     sh 'dotnet tool install --global Nuke.GlobalTool | echo "already installed"'
                 }
             }
         }
         stage('Pack') {
             steps {
-                withDotNet() {
+                withDotNet {
                     sh 'nuke pack'
                 }
             }
         }
         stage('Push') {
             steps {
-                withDotNet() {
+                withDotNet {
                     sh 'nuke push'
                 }
             }
