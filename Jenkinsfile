@@ -4,7 +4,6 @@ pipeline {
         stage('Install nuke') {
             steps {
                 withDotNet(sdk: '7.0') {
-                    sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
                     sh 'ls /var/jenkins_home/.dotnet/tools'
                     sh 'dotnet tool install --global Nuke.GlobalTool | echo "already installed"'
                 }
@@ -13,7 +12,7 @@ pipeline {
         stage('Pack') {
             steps {
                 withDotNet(sdk: '7.0') {
-                                        sh 'ls /var/jenkins_home/.dotnet/tools'
+                    sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
                     sh 'nuke pack'
                 }
             }
