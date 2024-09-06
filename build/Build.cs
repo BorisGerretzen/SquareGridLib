@@ -20,12 +20,14 @@ partial class Build : NukeBuild
     AbsolutePath OutputDirectory => RootDirectory / "output";
     AbsolutePath PackageDirectory => OutputDirectory / "nuget";
 
+    Project LibProject => Solution.GetProject(Globals.ProjectName);
+    
     Target Clean => _ => _
         .Before(Compile)
         .Executes(() =>
         {
             DotNetTasks.DotNetClean(s => s
-                .SetProject(Solution.GetProject(Globals.ProjectName))
+                .SetProject(LibProject)
                 .SetConfiguration(Configuration)
             );
 
@@ -46,7 +48,7 @@ partial class Build : NukeBuild
         .Executes(() =>
         {
             DotNetTasks.DotNetBuild(s => s
-                .SetProjectFile(Solution.GetProject(Globals.ProjectName)!.Path)
+                .SetProjectFile(LibProject.Path)
                 .SetConfiguration(Configuration)
             );
         });
