@@ -1,9 +1,18 @@
 ﻿using System.Linq;
 using Nuke.Common;
+using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
 
+[GitHubActions(
+    "publish",
+    GitHubActionsImage.UbuntuLatest,
+    On = new[] { GitHubActionsTrigger.WorkflowDispatch },
+    InvokedTargets = new[] { nameof(Pack), nameof(Push) },
+    ImportSecrets = new[] { nameof(NugetApiKey) },
+    FetchDepth = 0
+)]
 partial class Build
 {
     Target Pack => _ => _
@@ -12,7 +21,7 @@ partial class Build
         .Executes(() =>
         {
             DotNetTasks.DotNetPack(s => s
-                .SetProject(Solution.GetProject(Globals.ProjectName))
+                .SetProject(LibProject)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
                 .SetDescription("Blazor dashboard layout component that allows for placing panels of any size on a 2d grid.")

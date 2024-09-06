@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -27,7 +27,15 @@
         </None>
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.12"/>
+    </ItemGroup>
+    
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.33"/>
+    </ItemGroup>
+    
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8"/>
     </ItemGroup>
 </Project>

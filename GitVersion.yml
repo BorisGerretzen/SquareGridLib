@@ -1,6 +1,10 @@
-assembly-versioning-scheme: MajorMinorPatch
-mode: Mainline
-branches: { }
+﻿assembly-versioning-scheme: Major
+assembly-file-versioning-format: '{Major}.{Minor}.{Patch}'
+branches:
+  main:
+    regex: ^master$
+    tag: ''
+    increment: Patch
 ignore:
   sha: [ ]
 merge-message-formats: { }
